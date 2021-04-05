@@ -10,8 +10,12 @@ import java.util.List;
 @Service
 public class UserServiceImpl implements UserService {
 
+    private final UserDAO userDAO;
+
     @Autowired
-    private UserDAO userDAO;
+    public UserServiceImpl(UserDAO userDAO) {
+        this.userDAO = userDAO;
+    }
 
     @Override
     public void add(User user) {
@@ -19,8 +23,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void deleteUserById(long id) {
-        userDAO.deleteUserById(id);
+    public void deleteById(long id) {
+        userDAO.deleteById(id);
     }
 
     @Override
@@ -29,8 +33,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void get(long id) {
-        userDAO.get(id);
+    public User getById(long id) {
+        return userDAO.getById(id);
     }
 
     @Override

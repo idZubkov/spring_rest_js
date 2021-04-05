@@ -29,6 +29,9 @@ public class User {
         this.profession = profession;
     }
 
+    public User() {
+    }
+
     public long getId() {
         return id;
     }
@@ -45,11 +48,11 @@ public class User {
         this.name = name;
     }
 
-    public String getSurName() {
+    public String getSurname() {
         return surname;
     }
 
-    public void setSurName(String surName) {
+    public void setSurname(String surName) {
         this.surname = surName;
     }
 
@@ -66,7 +69,7 @@ public class User {
         return "User{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", surName='" + surname + '\'' +
+                ", surname='" + surname + '\'' +
                 ", profession='" + profession + '\'' +
                 '}';
     }

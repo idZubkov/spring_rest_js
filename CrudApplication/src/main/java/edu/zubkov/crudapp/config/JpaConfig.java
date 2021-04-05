@@ -13,17 +13,19 @@ import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+import javax.annotation.Resource;
 import javax.sql.DataSource;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
 @Configuration
-@PropertySource("db.properties")
+@PropertySource("classpath:db.properties")
 @EnableTransactionManagement
 @ComponentScan(value = "edu.zubkov.crudapp")
 public class JpaConfig {
 
+    @Resource
     private final Environment environment;
 
     @Autowired
@@ -31,7 +33,8 @@ public class JpaConfig {
         this.environment = environment;
     }
 
-    DataSource dataSource() {
+    @Bean
+    public DataSource dataSource() {
         BasicDataSource basicDataSource = new BasicDataSource();
         basicDataSource.setDriverClassName(environment.getRequiredProperty("db.driver"));
         basicDataSource.setUrl(environment.getRequiredProperty("db.url"));
@@ -62,7 +65,7 @@ public class JpaConfig {
     }
 
     @Bean
-    public PlatformTransactionManager platformTransactionManager() {
+    public PlatformTransactionManager transactionManager() {
         JpaTransactionManager jpaTransactionManager = new JpaTransactionManager();
         jpaTransactionManager.setEntityManagerFactory(entityManagerFactory().getObject());
         return jpaTransactionManager;

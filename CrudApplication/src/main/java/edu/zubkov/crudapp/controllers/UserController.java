@@ -1,32 +1,67 @@
 package edu.zubkov.crudapp.controllers;
 
+import edu.zubkov.crudapp.models.User;
 import edu.zubkov.crudapp.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PatchMapping;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
+
+import javax.transaction.Transactional;
 
 @Controller
 public class UserController {
 
-    @Autowired
-    private UserService userService;
+    private final UserService userService;
 
-    @GetMapping("/users")
+    @Autowired
+    public UserController(UserService userService) {
+        this.userService = userService;
+    }
+
+    @GetMapping("/")
     public String allUsers(Model model) {
-        model.addAttribute("user", userService.getAllUsers());
+        model.addAttribute("users", userService.getAllUsers());
         return "users";
     }
 
-    @PatchMapping("/edit")
-    public String edit() {
-        return "edit";
+    @GetMapping("/update/{id}")
+    public ModelAndView update(@PathVariable(name = "id") long id) {
+        return new ModelAndView("update", "user", userService.getById(id));
+    }
+
+    @PostMapping("/update/{id}")
+    @Transactional
+    public String editUser(@ModelAttribute("user") User user) {
+        userService.update(user);
+        return "redirect:/";
+    }
+
+    @GetMapping("/new")
+    @Transactional
+    public String addUser(Model model) {
+        model.addAttribute(new User());
+        return "create";
     }
 
     @PostMapping("/new")
-    public String addUser() {
-        return "newUser";
+    @Transactional
+    public String create(@ModelAttribute("user") User user) {
+        userService.add(user);
+        return "redirect:/";
+    }
+
+    @GetMapping("/{id}")
+    @Transactional
+    public String delete(@PathVariable("id") long id) {
+        userService.deleteById(id);
+        return "redirect:/";
+    }
+
+    @DeleteMapping("/{id}")
+    public String deleteUser(@PathVariable("id") long id) {
+        userService.deleteById(id);
+        return "redirect:/";
     }
 }
