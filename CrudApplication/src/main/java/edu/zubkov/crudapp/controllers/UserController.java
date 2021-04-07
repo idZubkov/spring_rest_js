@@ -8,8 +8,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.transaction.Transactional;
-
 @Controller
 public class UserController {
 
@@ -32,28 +30,24 @@ public class UserController {
     }
 
     @PostMapping("/update/{id}")
-    @Transactional
     public String editUser(@ModelAttribute("user") User user) {
         userService.update(user);
         return "redirect:/";
     }
 
     @GetMapping("/new")
-    @Transactional
     public String addUser(Model model) {
         model.addAttribute(new User());
         return "create";
     }
 
     @PostMapping("/new")
-    @Transactional
     public String create(@ModelAttribute("user") User user) {
         userService.add(user);
         return "redirect:/";
     }
 
     @GetMapping("/{id}")
-    @Transactional
     public String delete(@PathVariable("id") long id) {
         userService.deleteById(id);
         return "redirect:/";
