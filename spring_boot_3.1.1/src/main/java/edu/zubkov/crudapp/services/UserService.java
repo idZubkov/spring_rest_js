@@ -1,12 +1,11 @@
 package edu.zubkov.crudapp.services;
 
-import edu.zubkov.crudapp.models.Role;
 import edu.zubkov.crudapp.models.User;
+import org.springframework.security.core.userdetails.UserDetailsService;
 
 import java.util.List;
-import java.util.Set;
 
-public interface UserService {
+public interface UserService extends UserDetailsService {
     void add(User user);
 
     void deleteById(long id);
@@ -16,8 +15,6 @@ public interface UserService {
     User getById(long id);
 
     List<User> getAllUsers();
-
-    Set<Role> getAllRoles(List<String> idOfRoles);
 
     User findByUsername(String username);
 }

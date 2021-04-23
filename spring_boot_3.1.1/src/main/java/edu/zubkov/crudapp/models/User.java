@@ -14,6 +14,17 @@ import java.util.Set;
 @Table(name = "users")
 public class User implements UserDetails {
 
+    public User(String name, String surname, String profession, String username, String password) {
+        this.name = name;
+        this.surname = surname;
+        this.profession = profession;
+        this.username = username;
+        this.password = password;
+    }
+
+    public User() {
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @GenericGenerator(name = "increment", strategy = "increment")
@@ -28,13 +39,13 @@ public class User implements UserDetails {
     @Column(name = "profession")
     private String profession;
 
-    @Column(name = "login", nullable = false, unique = true)
+    @Column(name = "login")
     private String username;
 
-    @Column(name = "password", nullable = false)
+    @Column(name = "password")
     private String password;
 
-    @ManyToMany()
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "user_roles",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
@@ -45,9 +56,6 @@ public class User implements UserDetails {
         this.name = name;
         this.surname = surname;
         this.profession = profession;
-    }
-
-    public User() {
     }
 
     public long getId() {
