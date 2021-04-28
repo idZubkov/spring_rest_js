@@ -20,8 +20,12 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @ComponentScan("edu.zubkov.crudapp")
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
+    private final UserService userService;
+
     @Autowired
-    private UserService userService;
+    public SecurityConfig(UserService userService) {
+        this.userService = userService;
+    }
 
     @Override
     public void configure(AuthenticationManagerBuilder auth) {
