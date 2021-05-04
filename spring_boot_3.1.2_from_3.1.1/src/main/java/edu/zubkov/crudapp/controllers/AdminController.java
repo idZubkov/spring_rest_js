@@ -5,6 +5,7 @@ import edu.zubkov.crudapp.models.User;
 import edu.zubkov.crudapp.services.RoleService;
 import edu.zubkov.crudapp.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.annotation.Validated;
@@ -28,7 +29,10 @@ public class AdminController {
 
     @GetMapping
     public String allUsers(Model model) {
+        List<Role> rolez = roleService.listOfRoles();
         model.addAttribute("users", userService.getAllUsers());
+        model.addAttribute("rolez", rolez);
+        model.addAttribute("newUser", new User());
         return "admin";
     }
 
@@ -36,9 +40,9 @@ public class AdminController {
     public String update(@PathVariable(name = "id") long id, Model model) {
         User user = userService.getById(id);
         List<Role> roles = roleService.listOfRoles();
-        model.addAttribute("roles", roles);
+//        model.addAttribute("roles", roles);
         model.addAttribute("user", user);
-        return "update";
+        return "admin";
     }
 
     @PostMapping("/edit/{id}")
@@ -53,10 +57,10 @@ public class AdminController {
 
     @GetMapping("/new")
     public String addUser(Model model) {
-        List<Role> listOfRoles = roleService.listOfRoles();
-        model.addAttribute(new User());
-        model.addAttribute("roles", listOfRoles);
-        return "create";
+//        List<Role> listOfRoles = roleService.listOfRoles();
+//        model.addAttribute(new User());
+//        model.addAttribute("listOfRoles", listOfRoles);
+        return "admin";
     }
 
     @PostMapping("/createNewUser")
