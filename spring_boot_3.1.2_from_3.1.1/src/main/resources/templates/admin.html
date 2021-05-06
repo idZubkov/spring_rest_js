@@ -60,6 +60,7 @@
                             <th scope="col">Name</th>
                             <th scope="col">Surname</th>
                             <th scope="col">Username</th>
+                            <th scope="col">Profession</th>
                             <th scope="col">Role</th>
                             <th scope="col">Edit</th>
                             <th scope="col">Delete</th>
@@ -71,6 +72,7 @@
                             <td th:text="${user.name}">Name</td>
                             <td th:text="${user.surname}">Surname</td>
                             <td th:text="${user.username}">Email</td>
+                            <td th:text="${user.profession}">Profession</td>
                             <td th:text="${user.roles}">Role</td>
                             <td>
                                 <button class="btn btn-info edit-btn"
@@ -99,21 +101,27 @@
                                             <div style="text-align: center">
                                                 <div class="row justify-content-center align-items-center">
                                                     <form action="admin/edit/{id}"
+                                                          method="post"
                                                           th:object="${user}"
-                                                          method="post" th:id="${'editForm' + user.id}">
+                                                          th:id="${'editForm' + user.id}">
                                                         <div class="form-group font-weight-bold">
                                                             <label for="id">ID</label>
                                                             <input type="number" class="form-control" id="id"
                                                                    name="id" th:value="${user.id}" readonly>
                                                             <label for="editName">Name</label>
                                                             <input type="text" class="form-control" id="editName"
-                                                                   name="username" th:value="${user.name}">
+                                                                   name="name" th:value="${user.name}">
                                                             <label for="editSurname">Surname</label>
                                                             <input type="text" class="form-control" id="editSurname"
-                                                                   name="lastName" th:value="${user.surname}">
+                                                                   name="surname" th:value="${user.surname}">
                                                             <label for="editEmail">Email</label>
                                                             <input type="text" class="form-control" id="editEmail"
-                                                                   name="phoneNumber" th:value="${user.username}">
+                                                                   name="email" th:value="${user.username}">
+
+                                                            <label for="editProfession">Profession</label>
+                                                            <input type="text" class="form-control" id="editProfession"
+                                                                   name="profession" th:value="${user.profession}">
+
                                                             <label for="editPassword">Password</label>
                                                             <input type="password" class="form-control"
                                                                    id="editPassword"
