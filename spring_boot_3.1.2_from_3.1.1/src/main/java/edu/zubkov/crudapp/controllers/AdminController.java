@@ -5,7 +5,6 @@ import edu.zubkov.crudapp.models.User;
 import edu.zubkov.crudapp.services.RoleService;
 import edu.zubkov.crudapp.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.annotation.Validated;
