@@ -100,9 +100,9 @@
                                         <div class="modal-body">
                                             <div style="text-align: center">
                                                 <div class="row justify-content-center align-items-center">
-                                                    <form th:action="@{admin/edit/{id}(id=${user.id})}"
+                                                    <form th:action="@{/admin/edit/{id}(id=${user.id})}"
                                                           method="post"
-                                                          th:object="${user}"
+                                                          th:object="${users}"
                                                           th:id="${'editForm' + user.id}">
                                                         <div class="form-group font-weight-bold">
                                                             <label for="id">ID</label>
@@ -167,7 +167,7 @@
                                         <div class="modal-body">
                                             <div style="text-align: center;">
                                                 <div class="row justify-content-center align-items-center">
-                                                    <form class="text-center" th:action="@{admin/{id}}"
+                                                    <form class="text-center" th:action="@{/admin/{id}}"
                                                           th:object="${user}" method="post"
                                                           th:id="${'deleteForm' + user.id}">
                                                         <div class="form-group font-weight-bold">
@@ -224,26 +224,27 @@
                 <div class="tab-pane" id="new" role="tabpanel" aria-labelledby="new-tab">
                     <h5 class="card-header">Add new user</h5>
                     <div class="row justify-content-center align-items-center">
-                        <form class="text-center" th:action="@{/admin/createNewUser}" th:object="${newUser}" method="post">
+                        <form class="text-center" th:action="@{/admin/createNewUser}" th:object="${newUser}" th:method="POST">
                             <div class="form-group font-weight-bold">
                                 <label for="name">Name</label>
-                                <input type="text" class="form-control" id="name" name="name"
-                                       placeholder="Name">
+                                <input type="text" class="form-control" id="name"
+                                       placeholder="Name" th:field="*{name}">
 
                                 <label for="surname">Surname</label>
-                                <input type="text" class="form-control" id="surname" name="surname"
-                                       placeholder="Surname">
+                                <input type="text" class="form-control" id="surname"
+                                       placeholder="Surname" th:field="*{surname}">
 
                                 <label for="email">Email</label>
-                                <input type="text" class="form-control" id="email" name="username" placeholder="Email">
+                                <input type="text" class="form-control" id="email" placeholder="Email"
+                                       th:field="*{username}">
 
                                 <label for="profession">Profession</label>
-                                <input type="text" class="form-control" id="profession" name="profession"
-                                       placeholder="Profession">
+                                <input type="text" class="form-control" id="profession"
+                                       placeholder="Profession" th:field="*{profession}">
 
                                 <label for="password">Password</label>
-                                <input type="password" class="form-control" id="password" name="password"
-                                       placeholder="Password">
+                                <input type="password" class="form-control" id="password"
+                                       placeholder="Password" th:field="*{password}">
 
                                 <label for="role">Role</label>
                                 <select class="form-select w-100" size="2" id="role" name="checkBoxRoles">

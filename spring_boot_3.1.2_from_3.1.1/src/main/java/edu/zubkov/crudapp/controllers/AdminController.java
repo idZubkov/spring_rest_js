@@ -35,14 +35,14 @@ public class AdminController {
         return "admin";
     }
 
-    @GetMapping("/update/{id}")
-    public String update(@PathVariable(name = "id") long id, Model model) {
-        User user = userService.getById(id);
-        List<Role> roles = roleService.listOfRoles();
-//        model.addAttribute("roles", roles);
-        model.addAttribute("user", user);
-        return "admin";
-    }
+//    @GetMapping("/update/{id}")
+//    public String update(@PathVariable(name = "id") long id, Model model) {
+//        User user = userService.getById(id);
+////        List<Role> roles = roleService.listOfRoles();
+////        model.addAttribute("roles", roles);
+//        model.addAttribute("user", user);
+//        return "admin";
+//    }
 
     @PostMapping("/edit/{id}")
     public String editUser(@Validated(User.class) @ModelAttribute("user") User user,
@@ -54,13 +54,13 @@ public class AdminController {
         return "redirect:/admin";
     }
 
-    @GetMapping("/new")
-    public String addUser(Model model) {
-//        List<Role> listOfRoles = roleService.listOfRoles();
-//        model.addAttribute(new User());
-//        model.addAttribute("listOfRoles", listOfRoles);
-        return "admin";
-    }
+//    @GetMapping("/new")
+//    public String addUser(Model model) {
+////        List<Role> listOfRoles = roleService.listOfRoles();
+////        model.addAttribute(new User());
+////        model.addAttribute("listOfRoles", listOfRoles);
+//        return "admin";
+//    }
 
     @PostMapping("/createNewUser")
     public String create(@Validated(User.class) @ModelAttribute("user") User user,
@@ -71,11 +71,11 @@ public class AdminController {
         return "redirect:/admin";
     }
 
-    @GetMapping("/{id}")
-    public String delete(@PathVariable("id") long id) {
-        userService.deleteById(id);
-        return "redirect:/admin";
-    }
+//    @GetMapping("/{id}")
+//    public String delete(@PathVariable("id") long id) {
+//        userService.deleteById(id);
+//        return "redirect:/admin";
+//    }
 
     @DeleteMapping("/{id}")
     public String deleteUser(@PathVariable("id") long id) {
