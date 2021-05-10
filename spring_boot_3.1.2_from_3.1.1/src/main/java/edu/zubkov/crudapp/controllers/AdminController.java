@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.List;
 import java.util.Set;
 
@@ -27,11 +28,13 @@ public class AdminController {
     }
 
     @GetMapping
-    public String allUsers(Model model) {
+    public String allUsers(Model model, Principal principal) {
         List<Role> rolez = roleService.listOfRoles();
+        User user =userService.findByUsername(principal.getName());
         model.addAttribute("users", userService.getAllUsers());
         model.addAttribute("rolez", rolez);
         model.addAttribute("newUser", new User());
+        model.addAttribute("user",  user);
         return "admin";
     }
 
@@ -48,21 +51,21 @@ public class AdminController {
     public String editUser(@Validated(User.class) @ModelAttribute("user") User user,
                            @RequestParam(value = "authorities", required = false) List<String> listOfStrings,
                            @PathVariable("id") long id, Model model) {
-
+//        model.addAttribute("userInEdit", userService.getById(id));
         Set<Role> roleSet = roleService.getAllRoles(listOfStrings);
         user.setRoles(roleSet);
-
+//        model.addAttribute("rolesInEdit", roleSet);
         userService.update(user, id);
         return "redirect:/admin";
     }
 
 //    @GetMapping("/new")
-//    public String addUser(Model model) {
-////        List<Role> listOfRoles = roleService.listOfRoles();
-////        model.addAttribute(new User());
-////        model.addAttribute("listOfRoles", listOfRoles);
-//        return "admin";
-//    }
+////    public String addUser(Model model) {
+//////        List<Role> listOfRoles = roleService.listOfRoles();
+//////        model.addAttribute(new User());
+//////        model.addAttribute("listOfRoles", listOfRoles);
+////        return "admin";
+////    }
 
     @PostMapping("/createNewUser")
     public String create(@Validated(User.class) @ModelAttribute("user") User user,
@@ -79,7 +82,7 @@ public class AdminController {
 //        return "redirect:/admin";
 //    }
 
-    @DeleteMapping("/{id}")
+    @PostMapping("/{id}")
     public String deleteUser(@PathVariable("id") long id) {
         userService.deleteById(id);
         return "redirect:/admin";

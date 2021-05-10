@@ -30,65 +30,42 @@
         </li>
     </ul>
 </nav>
-<!---->
-<!---->
-<!---->
 
 <div class="container-fluid">
     <div class="row">
         <div class="col-2 bg-white">
+            <br/>
             <nav class="nav flex-column nav-pills">
                 <a class="nav-link active" href="/user">User</a>
             </nav>
         </div>
         <!--        таблица-->
         <div class="col-10 bg-light">
-            <h2>User information-page</h2>
+            <h1>User information-page</h1>
             </br>
-            <h6>About user</h6>
+            <div><h5 class="card-header">About user</h5></div>
             </br>
             <table class="table table-light table-striped">
                 <tr>
-                    <th>Id</th>
-                    <th>Name</th>
-                    <th>Surname</th>
-                    <th>Email</th>
-                    <th>Profession</th>
+                    <th scope="col">ID</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Surname</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Profession</th>
+                    <th scope="col">Role</th>
                 </tr>
 
                 <tr>
-                    <td th:utext="${user.id}"></td>
-                    <td th:utext="${user.name}"></td>
-                    <td th:utext="${user.surname}"></td>
-                    <td th:utext="${user.username}"></td>
-                    <td th:utext="${user.profession}"></td>
+                    <td th:text="${user.id}">Id</td>
+                    <td th:text="${user.name}">Name</td>
+                    <td th:text="${user.surname}">Surname</td>
+                    <td th:text="${user.username}">Email</td>
+                    <td th:text="${user.profession}">Profession</td>
+                    <td th:text="${user.roles}">Role</td>
                 </tr>
             </table>
         </div>
     </div>
 </div>
-</div>
-<!---->
-<!---->
-<!---->
-
-<!--<table border="1">-->
-<!--    <tr>-->
-<!--        <th>Id</th>-->
-<!--        <th>Name</th>-->
-<!--        <th>Surname</th>-->
-<!--        <th>Email</th>-->
-<!--        <th>Profession</th>-->
-<!--    </tr>-->
-
-<!--    <tr>-->
-<!--        <td th:utext="${user.id}"></td>-->
-<!--        <td th:utext="${user.name}"></td>-->
-<!--        <td th:utext="${user.surname}"></td>-->
-<!--        <td th:utext="${user.username}"></td>-->
-<!--        <td th:utext="${user.profession}"></td>-->
-<!--    </tr>-->
-<!--</table>-->
-<a th:href="@{/logout}">Logout</a>
 </body>
 </html>
