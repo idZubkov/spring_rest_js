@@ -14,14 +14,6 @@ import java.util.Set;
 @Table(name = "users")
 public class User implements UserDetails {
 
-//    public User(String name, String surname, String profession, String username, String password) {
-//        this.name = name;
-//        this.surname = surname;
-//        this.profession = profession;
-//        this.username = username;
-//        this.password = password;
-//    }
-
     public User() {
     }
 
@@ -50,13 +42,6 @@ public class User implements UserDetails {
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
-
-//    public User(long id, String name, String surname, String profession) {
-//        this.id = id;
-//        this.name = name;
-//        this.surname = surname;
-//        this.profession = profession;
-//    }
 
     public long getId() {
         return id;
