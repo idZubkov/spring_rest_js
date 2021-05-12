@@ -44,7 +44,8 @@
                 </li>
             </ul>
         </div>
-        <!--           Пустые вкалдки-->
+
+        <!--           ВКЛАДКИ          -->
         <div class="col-10 bg-light">
             <br/>
             <div><h1>Admin panel</h1></div>
@@ -61,7 +62,8 @@
             </ul>
 
             <div class="tab-content">
-                <!--                Вкладка All users-->
+
+                <!--                Вкладка All users                       -->
                 <div class="tab-pane show active" id="admin" role="tabpanel">
                     <div><h5 class="card-header">All users</h5></div>
                     <br/>
@@ -106,7 +108,7 @@
                                             </div>
                                             <div class="modal-body">
 
-                                                <!--                        EDIT USER MODAL FORM                                -->
+                                                <!--           EDIT USER MODAL FORM                                -->
                                                 <form th:action="@{/admin/edit/{id}(id=${user.id})}"
                                                       th:method="POST"
                                                       th:object="${users}"
@@ -160,7 +162,7 @@
                                 </div>
                             </th>
 
-                            <!--                                     Заполнение модального окна Delete user         -->
+                            <!--               Заполнение модального окна Delete user         -->
                             <th>
                                 <button type="button" class="btn btn-danger"
                                         data-toggle="modal"

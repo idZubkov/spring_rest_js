@@ -35,12 +35,20 @@
     <div class="row">
         <div class="col-2 bg-white">
             <br/>
+
+            <div th:if="${user.rolesWithoutPrefix()} == 'ADMIN USER' or ${user.rolesWithoutPrefix()} == 'USER ADMIN'">
+                <a class="nav-link text-primary" href="/admin">Admin</a>
+            </div>
+
+
             <nav class="nav flex-column nav-pills">
                 <a class="nav-link active" href="/user">User</a>
             </nav>
         </div>
-        <!--        таблица-->
+
+        <!--            ТАБЛИЦА          -->
         <div class="col-10 bg-light">
+            <br/>
             <h1>User information-page</h1>
             </br>
             <div><h5 class="card-header">About user</h5></div>

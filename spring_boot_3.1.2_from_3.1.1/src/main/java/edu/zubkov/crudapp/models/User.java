@@ -99,8 +99,9 @@ public class User implements UserDetails {
         this.password = password;
     }
 
-    public void setRolesAsString(Role[] roles) {
-        this.roles.addAll(Arrays.asList(roles));
+    public String rolesWithoutPrefix() {
+        return getRoles().toString().replace("[", "").replace("ROLE_", "")
+                .replace("]", "").replace(",", "");
     }
 
     @Override
