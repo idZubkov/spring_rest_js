@@ -267,8 +267,8 @@
                                 <label for="role">Role</label>
                                 <select class="form-select w-100" size="2" id="role" name="authorities">
                                     <option th:each="role : ${rolez}"
-                                            th:value="${role.id}"
-                                            th:text="${role.name}">
+                                            th:text="${role.name}"
+                                            th:value="${role.name}">
                                     </option>
                                 </select>
                                 <button type="submit" class="btn btn-success">Add new user</button>

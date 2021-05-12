@@ -1,6 +1,8 @@
 package edu.zubkov.crudapp.services;
 
+import edu.zubkov.crudapp.dao.RoleDAO;
 import edu.zubkov.crudapp.dao.UserDAO;
+import edu.zubkov.crudapp.models.Role;
 import edu.zubkov.crudapp.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -9,18 +11,23 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class UserServiceImpl implements UserService {
 
     private final UserDAO userDAO;
 
+    private final RoleDAO roleDAO;
+
     private final PasswordEncoder passwordEncoder;
 
     @Autowired
-    public UserServiceImpl(UserDAO userDAO, PasswordEncoder passwordEncoder) {
+    public UserServiceImpl(UserDAO userDAO, RoleDAO roleDAO, PasswordEncoder passwordEncoder) {
         this.userDAO = userDAO;
+        this.roleDAO = roleDAO;
         this.passwordEncoder = passwordEncoder;
     }
 
@@ -33,7 +40,17 @@ public class UserServiceImpl implements UserService {
         newUser.setProfession(user.getProfession());
         newUser.setUsername(user.getUsername());
         newUser.setPassword(passwordEncoder.encode(user.getPassword()));
-        newUser.setRoles(user.getRoles());
+        Set<Role> rolesForUser = new HashSet<>();
+        Set<Role> rolesForUser2 = new HashSet<>();
+        rolesForUser.add(roleDAO.roleByName("ROLE_ADMIN"));
+        rolesForUser.add(roleDAO.roleByName("ROLE_USER"));
+        rolesForUser2.add(roleDAO.roleByName("ROLE_USER"));
+        for (Role role : user.getRoles()) {
+            if (role.getName().equals("ROLE_ADMIN")) {
+                newUser.setRoles(rolesForUser);
+            } else
+                newUser.setRoles(rolesForUser2);
+        }
         userDAO.add(newUser);
     }
 
@@ -52,7 +69,19 @@ public class UserServiceImpl implements UserService {
         userToUpdate.setSurname(user.getSurname());
         userToUpdate.setProfession(user.getProfession());
         userToUpdate.setPassword(user.getPassword());
-        userDAO.update(user);
+        Set<Role> rolesForUser = new HashSet<>();
+        Set<Role> rolesForUser2 = new HashSet<>();
+        rolesForUser.add(roleDAO.roleByName("ROLE_ADMIN"));
+        rolesForUser.add(roleDAO.roleByName("ROLE_USER"));
+
+        rolesForUser2.add(roleDAO.roleByName("ROLE_USER"));
+        for (Role role : user.getRoles()) {
+            if (role.getName().equals("ROLE_ADMIN")) {
+                user.setRoles(rolesForUser);
+            } else
+                user.setRoles(rolesForUser2);
+            userDAO.update(user);
+        }
     }
 
     @Override

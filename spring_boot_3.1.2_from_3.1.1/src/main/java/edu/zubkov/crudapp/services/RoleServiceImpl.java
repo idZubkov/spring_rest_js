@@ -30,11 +30,18 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
-    public Set<Role> getAllRoles(List<String> idOfRoles) {
-        Set<Role> setOfRoles = new HashSet<>();
-        for (String id : idOfRoles) {
-            setOfRoles.add(roleDAO.roleById(Long.parseLong(id)));
+    public Set<Role> getAllRoles(String roles) {
+        Set<Role> setOfRoles = roleDAO.setOfRoles(roles);
+
+        String[] arrayOfRoles = roles.split(",");
+        Set<Role> userRoles = new HashSet<>();
+
+        for (String nameOfRole: arrayOfRoles) {
+            for (Role role: setOfRoles) {
+                if (role.getName().equals(nameOfRole))
+                    userRoles.add(roleDAO.roleByName(nameOfRole));
+            }
         }
-        return setOfRoles;
+        return userRoles;
     }
 }
