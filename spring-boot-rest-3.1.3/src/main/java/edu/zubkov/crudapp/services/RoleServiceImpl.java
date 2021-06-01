@@ -38,7 +38,7 @@ public class RoleServiceImpl implements RoleService {
 
         for (String nameOfRole: arrayOfRoles) {
             for (Role role: setOfRoles) {
-                if (role.getName().equals(nameOfRole))
+                if (role.getNameOfRole().equals(nameOfRole))
                     userRoles.add(roleDAO.roleByName(nameOfRole));
             }
         }

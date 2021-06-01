@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -19,11 +19,14 @@
 <body>
 
 <nav class="navbar navbar-dark bg-dark d-flex justify-content-between">
-    <span>
-    <span class="navbar-brand font-weight-bold" th:text="${user.username}"></span>
-    <span class="navbar-brand"
-          th:text="'with roles: ' + ${user.roles}"></span>
-    </span>
+    <ul class="navbar-nav mr-auto">
+        <b><h5 class="text-white" id="navbarUsername"></h5></b>
+        <h5 class="text-white">with roles:&nbsp
+            <span style="float:right">
+                <h5 class="text-white" id="navbarRoles"></h5>
+            </span>
+        </h5>
+    </ul>
     <ul class="navbar-nav">
         <li class="nav-item">
             <a class="nav-link" href="/logout">Logout</a>
@@ -36,7 +39,7 @@
         <div class="col-2 bg-white">
             <br/>
 
-            <div th:if="${user.rolesWithoutPrefix()} == 'ADMIN USER' or ${user.rolesWithoutPrefix()} == 'USER ADMIN'">
+            <div id="linkAdmin">
                 <a class="nav-link text-primary" href="/admin">Admin</a>
             </div>
 
@@ -64,16 +67,24 @@
                 </tr>
 
                 <tr>
-                    <td th:text="${user.id}">Id</td>
-                    <td th:text="${user.name}">Name</td>
-                    <td th:text="${user.surname}">Surname</td>
-                    <td th:text="${user.username}">Email</td>
-                    <td th:text="${user.profession}">Profession</td>
-                    <td th:text="${user.roles}">Role</td>
+                    <!--                    <td th:text="${user.id}">Id</td>-->
+                    <!--                    <td th:text="${user.name}">Name</td>-->
+                    <!--                    <td th:text="${user.surname}">Surname</td>-->
+                    <!--                    <td th:text="${user.username}">Email</td>-->
+                    <!--                    <td th:text="${user.profession}">Profession</td>-->
+                    <!--                    <td th:text="${user.roles}">Role</td>-->
+                    <td id="tableID"></td>
+                    <td id="tableName"></td>
+                    <td id="tableSurname"></td>
+                    <td id="tableUsername"></td>
+                    <td id="tableProfession"></td>
+                    <td id="tableRoles"></td>
                 </tr>
             </table>
         </div>
     </div>
 </div>
+<script src="/user.js">
+</script>
 </body>
 </html>

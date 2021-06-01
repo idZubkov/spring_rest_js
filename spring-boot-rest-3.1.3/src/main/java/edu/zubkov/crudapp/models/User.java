@@ -1,11 +1,11 @@
 package edu.zubkov.crudapp.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.GenericGenerator;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -38,6 +38,7 @@ public class User implements UserDetails {
     private String password;
 
     @ManyToMany(fetch = FetchType.EAGER)
+    @JsonIgnore
     @JoinTable(name = "user_roles",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
@@ -99,7 +100,7 @@ public class User implements UserDetails {
         this.password = password;
     }
 
-    public String rolesWithoutPrefix() {
+    public String getRolesWithoutPrefix() {
         return getRoles().toString().replace("[", "").replace("ROLE_", "")
                 .replace("]", "").replace(",", "");
     }

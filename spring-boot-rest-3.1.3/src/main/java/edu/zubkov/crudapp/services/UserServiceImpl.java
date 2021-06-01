@@ -46,7 +46,7 @@ public class UserServiceImpl implements UserService {
         rolesForUser.add(roleDAO.roleByName("ROLE_USER"));
         rolesForUser2.add(roleDAO.roleByName("ROLE_USER"));
         for (Role role : user.getRoles()) {
-            if (role.getName().equals("ROLE_ADMIN")) {
+            if (role.getNameOfRole().equals("ROLE_ADMIN")) {
                 newUser.setRoles(rolesForUser);
             } else
                 newUser.setRoles(rolesForUser2);
@@ -76,7 +76,7 @@ public class UserServiceImpl implements UserService {
 
         rolesForUser2.add(roleDAO.roleByName("ROLE_USER"));
         for (Role role : user.getRoles()) {
-            if (role.getName().equals("ROLE_ADMIN")) {
+            if (role.getNameOfRole().equals("ROLE_ADMIN")) {
                 user.setRoles(rolesForUser);
             } else
                 user.setRoles(rolesForUser2);
