@@ -15,13 +15,12 @@ import java.util.List;
 public class AdminRestController {
 
     private final UserService userService;
+    private final RoleService roleService;
 
     @Autowired
-    private RoleService roleService;
-
-    @Autowired
-    public AdminRestController(UserService userService) {
+    public AdminRestController(UserService userService, RoleService roleService) {
         this.userService = userService;
+        this.roleService = roleService;
     }
 
     @GetMapping
@@ -29,9 +28,9 @@ public class AdminRestController {
         return ResponseEntity.ok(userService.getAllUsers());
     }
 
-    @PostMapping("/edit/{id}")
-    public ResponseEntity<User> editUser(@RequestBody User user, @PathVariable("id") long id) {
-        userService.update(user, id);
+    @PostMapping("/edit")
+    public ResponseEntity<User> editUser(@RequestBody User user) {
+        userService.update(user, user.getId());
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
@@ -41,8 +40,8 @@ public class AdminRestController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @PostMapping("/{id}")
-    public ResponseEntity<User> deleteUser(@PathVariable("id") long id) {
+    @DeleteMapping("/delete")
+    public ResponseEntity<User> deleteUser(@RequestBody long id) {
         userService.deleteById(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
