@@ -18,7 +18,7 @@ $('.AddUserButton').on('click', function () {
     let user = {
         name: $('#name').val(),
         surname: $('#surname').val(),
-        username: $('#userName').val(),
+        username: $('#username').val(),
         profession: $('#profession').val(),
         password: $('#password').val(),
         roles: createRoles('#roles')
@@ -61,7 +61,7 @@ function createRowForUser(user) {
                 <td>${user.profession}</td>
                 <td>${user.rolesWithoutPrefix}</td>
                 <td> 
-                    <button type="button" class="btn" style="background-color: darkturquoise" data-toggle="modal" data-target="#modalEdit"
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalEdit"
                                             data-ID="${user.id}"
                                             data-Name="${user.name}"
                                             data-Surname="${user.surname}"

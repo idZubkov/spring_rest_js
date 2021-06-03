@@ -19,9 +19,7 @@ import java.util.Set;
 public class UserServiceImpl implements UserService {
 
     private final UserDAO userDAO;
-
     private final RoleDAO roleDAO;
-
     private final PasswordEncoder passwordEncoder;
 
     @Autowired
@@ -37,14 +35,18 @@ public class UserServiceImpl implements UserService {
         User newUser = new User();
         newUser.setName(user.getName());
         newUser.setSurname(user.getSurname());
-        newUser.setProfession(user.getProfession());
         newUser.setUsername(user.getUsername());
+        newUser.setProfession(user.getProfession());
         newUser.setPassword(passwordEncoder.encode(user.getPassword()));
+
         Set<Role> rolesForUser = new HashSet<>();
         Set<Role> rolesForUser2 = new HashSet<>();
+
         rolesForUser.add(roleDAO.roleByName("ROLE_ADMIN"));
         rolesForUser.add(roleDAO.roleByName("ROLE_USER"));
+
         rolesForUser2.add(roleDAO.roleByName("ROLE_USER"));
+
         for (Role role : user.getRoles()) {
             if (role.getNameOfRole().equals("ROLE_ADMIN")) {
                 newUser.setRoles(rolesForUser);
@@ -67,20 +69,24 @@ public class UserServiceImpl implements UserService {
         User userToUpdate = getById(id);
         userToUpdate.setName(user.getName());
         userToUpdate.setSurname(user.getSurname());
+        userToUpdate.setUsername(user.getUsername());
         userToUpdate.setProfession(user.getProfession());
-        userToUpdate.setPassword(user.getPassword());
+        userToUpdate.setPassword(passwordEncoder.encode(user.getPassword()));
+
         Set<Role> rolesForUser = new HashSet<>();
         Set<Role> rolesForUser2 = new HashSet<>();
+
         rolesForUser.add(roleDAO.roleByName("ROLE_ADMIN"));
         rolesForUser.add(roleDAO.roleByName("ROLE_USER"));
 
         rolesForUser2.add(roleDAO.roleByName("ROLE_USER"));
+
         for (Role role : user.getRoles()) {
             if (role.getNameOfRole().equals("ROLE_ADMIN")) {
-                user.setRoles(rolesForUser);
+                userToUpdate.setRoles(rolesForUser);
             } else
-                user.setRoles(rolesForUser2);
-            userDAO.update(user);
+                userToUpdate.setRoles(rolesForUser2);
+            userDAO.update(userToUpdate);
         }
     }
 
