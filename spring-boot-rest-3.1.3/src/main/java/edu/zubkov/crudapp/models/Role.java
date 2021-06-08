@@ -14,7 +14,7 @@ public class Role implements GrantedAuthority {
     private long id;
 
     @Column(name = "name")
-    @JsonIgnore
+//    @JsonIgnore
     private String nameOfRole;
 
 //    @ManyToMany(mappedBy = "roles")
@@ -34,6 +34,8 @@ public class Role implements GrantedAuthority {
     public String getNameOfRole() {
         return nameOfRole;
     }
+
+
 
     public void setNameOfRole(String nameOfRole) {
         this.nameOfRole = nameOfRole;

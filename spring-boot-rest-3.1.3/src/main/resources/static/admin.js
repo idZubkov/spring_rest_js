@@ -66,8 +66,9 @@ function createRowForUser(user) {
                                             data-Name="${user.name}"
                                             data-Surname="${user.surname}"
                                             data-Username="${user.username}"
-                                            data-Profession="${user.profession}">
-                        <div class="text-white">Edit</div>
+                                            data-Profession="${user.profession}" 
+                                            >
+                        <div>Edit</div>
                     </button>
                 </td>
                 </td>
@@ -166,7 +167,7 @@ function createRoles(selector) {
     $(selector).find('option:selected').each(function () {
         roles.push({
             id: $(this).val(),
-            roleName: $(this).attr('name')
+            nameOfRole: $(this).attr('name')
         })
     })
     return roles
