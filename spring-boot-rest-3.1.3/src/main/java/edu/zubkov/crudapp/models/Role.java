@@ -1,11 +1,14 @@
 package edu.zubkov.crudapp.models;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
 
 @Entity
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "roles")
 public class Role implements GrantedAuthority {
 
@@ -14,40 +17,7 @@ public class Role implements GrantedAuthority {
     private long id;
 
     @Column(name = "name")
-//    @JsonIgnore
     private String nameOfRole;
-
-//    @ManyToMany(mappedBy = "roles")
-//    private Set<User> users;
-
-    public Role() {
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public String getNameOfRole() {
-        return nameOfRole;
-    }
-
-
-
-    public void setNameOfRole(String nameOfRole) {
-        this.nameOfRole = nameOfRole;
-    }
-
-//    public Set<User> getUsers() {
-//        return users;
-//    }
-
-//    public void setUsers(Set<User> users) {
-//        this.users = users;
-//    }
 
     @Override
     public String getAuthority() {

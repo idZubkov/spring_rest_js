@@ -1,5 +1,6 @@
 package edu.zubkov.crudapp.controllers;
 
+import edu.zubkov.crudapp.dto.UserDto;
 import edu.zubkov.crudapp.models.User;
 import edu.zubkov.crudapp.services.RoleService;
 import edu.zubkov.crudapp.services.UserService;
@@ -28,15 +29,15 @@ public class AdminRestController {
         return ResponseEntity.ok(userService.getAllUsers());
     }
 
-    @PostMapping("/edit")
-    public ResponseEntity<User> editUser(@RequestBody User user) {
-        userService.update(user, user.getId());
+    @PutMapping("/edit")
+    public ResponseEntity<User> editUser(@RequestBody UserDto userDto) {
+        userService.update(userDto, userDto.getId());
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @PostMapping("/createNewUser")
-    public ResponseEntity<User> create(@RequestBody User user) {
-        userService.add(user);
+    public ResponseEntity<User> create(@RequestBody UserDto userDto) {
+        userService.add(userDto);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 

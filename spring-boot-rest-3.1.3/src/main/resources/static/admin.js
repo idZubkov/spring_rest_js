@@ -145,7 +145,7 @@ $('#editUserButton').on('click', function () {
 
     if (userEdit.name != '' && userEdit.surname != '' && userEdit.username != '' && userEdit.profession != '' && userEdit.password != '') {
         fetch('http://localhost:8080/admin-rest/edit', {
-            method: "POST",
+            method: "PUT",
             headers: {
                 "Content-Type": "application/json; charset=utf-8"
             },
